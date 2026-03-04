@@ -1,0 +1,118 @@
+.my-btn {
+  margin-right: 5px;
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  background: white;
+  color: rgb(4,4,4);
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+.my-btn:hover { filter: brightness(70%); }
+.my-btn.primary:hover{ filter: brightness(70%); }
+.my-btn.secondary:hover{ filter: brightness(70%); }
+.my-btn:active { filter: brightness(130%); }
+.my-btn.primary { background: #ff2f00; }
+.my-btn.secondary { background-color: #fc613f; }
+.my-btn.execute { width: 110px; border-radius: 34px; }
+
+.result {
+  width: 220px;
+  height: 50px;
+  margin-bottom: 15px;
+  padding-right: 10px;
+  background: white;
+  text-align: right;
+  color: #070707;
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+body {
+  position: relative;
+  background-color: white;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  background-image: url("images\\фон.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.home {
+  background-image: none;
+}
+
+body.dark-theme {
+  background-image: url("images\\фон2.png");
+}
+
+/* контейнер для центрирования контента (с учётом padding body) */
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 40px);
+  box-sizing: border-box;
+}
+
+/* контейнер калькулятора */
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color:#c9dced;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 5);
+}
+
+.theme-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  color: #fcf9f9;
+  background: #ff2f00;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.theme-btn:hover { filter: brightness(70%); }
+
+.nav-btn {
+  position: fixed;
+  top: 12px;
+  left: 150px;
+  text-decoration: none;
+  color: #fcf9f9;
+  background: #ff2f00;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-btn:hover { filter: brightness(70%); }
+
+.logo {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  z-index: 1002;
+}
+.logo .ros { color: #e53935; }
+.logo .tender { color: #000; margin-left: 4px; }
