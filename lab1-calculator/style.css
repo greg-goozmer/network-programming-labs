@@ -120,3 +120,9 @@ body.dark-theme {
 }
 .logo .ros { color: #e53935; }
 .logo .tender { color: #000; margin-left: 4px; }
+
+.extra-buttons {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
