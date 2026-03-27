@@ -30,17 +30,6 @@ window.onload = function() {
     const sqrtBtn = document.getElementById('btn_op_sqrt');
     const squareBtn = document.getElementById('btn_op_square');
 
-    // для них только заглушки
-    // const backspaceBtn = document.getElementById('btn_op_backspace');
-    // const factBtn = document.getElementById('btn_op_fact');
-    // const tripleZeroBtn = document.getElementById('btn_op_000');
-    // const cubeBtn = document.getElementById('btn_op_cube');
-    // const mPlusBtn = document.getElementById('btn_op_mplus');
-    // const mMinusBtn = document.getElementById('btn_op_mminus');
-    // const mrBtn = document.getElementById('btn_op_mr');
-    // const mcBtn = document.getElementById('btn_op_mc');
-    // const resultColorBtn = document.getElementById('btn_result_color');
-
     function getCurrentNumber() {
         return selectedOperation ? b : a;
     }
@@ -51,13 +40,38 @@ window.onload = function() {
         } else {
             a = value;
         }
-        outputElement.innerHTML = value === '' ? '0' : value;
+
+        let displayStr;
+        if (value === 'Ошибка') {
+            displayStr = 'Ошибка';
+            a = '';
+            b = '';
+            selectedOperation = null;
+        } else if (value.length > 16) {
+            displayStr = 'BIG NUMBER';
+        } else {
+            displayStr = value === '' ? '0' : value;
+        }
+
+        outputElement.innerHTML = displayStr;
     }
 
     function onDigitButtonClicked(digit) {
         let current = getCurrentNumber();
 
+        if (current === 'Ошибка') {
+            current = 0;
+            a = '';
+            b = '';
+            selectedOperation = null;
+            outputElement.innerHTML = '0';
+        }
+
         if (digit === '.' && current.includes('.')) return;
+
+        if (digit === '0' && current == 0) return;
+
+        if (current.length >= 16) return;
 
         current += digit;
         setCurrentNumber(current);
@@ -114,7 +128,7 @@ window.onload = function() {
             case 'x': result = numA * numB; break;
             case '/':
                 if (numB === 0) {
-                    outputElement.innerHTML = 'Ошибка';
+                    setCurrentNumber('Ошибка');
                     return;
                 }
                 result = numA / numB;
@@ -124,7 +138,7 @@ window.onload = function() {
         a = result.toString();
         b = '';
         selectedOperation = null;
-        outputElement.innerHTML = a;
+        setCurrentNumber(a);
 
         squareBtn.onclick = () => {
             let current = getCurrentNumber();
@@ -134,7 +148,8 @@ window.onload = function() {
             a = result;
             b = '';
             selectedOperation = null;
-            outputElement.innerHTML = a;
+            // outputElement.innerHTML = a;
+            setCurrentNumber(a);
         };
 
         sqrtBtn.onclick = () => {
@@ -149,7 +164,8 @@ window.onload = function() {
             a = result;
             b = '';
             selectedOperation = null;
-            outputElement.innerHTML = a;
+            //outputElement.innerHTML = a;
+            setCurrentNumber(a);
         };
     }
 }
