@@ -19,16 +19,16 @@ export class MainPage {
         return `
             <header class="topbar container py-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <div class="brand"><span class="brand-red">Рос</span>Тендер</div>
-                <span class="text-muted">ЛР 3 · Тема: продукты · Компонент: badge</span>
+                <span class="text-muted">ЛР 3 · Жеребенков А.Ю.</span>
             </header>
 
             <section class="hero-section">
                 <div class="container py-5">
                     <div class="hero-box text-center mx-auto">
-                        <p class="section-label mb-3">Полезные продукты</p>
-                        <h1 class="mb-3">Карточки в стиле сервиса РосТендер</h1>
+                        
+                        <h1 class="mb-3">Помогаем разобраться в тендерах и начать участвовать</h1>
                         <p class="hero-text mb-0">
-                            Главная страница показывает несколько карточек продукта. Каждая карточка содержит bootstrap-значки и кнопку перехода на вторую страницу.
+                            На данной странице представлены несколько карточек продуктов, которые можно приобрести/получить бесплатно.
                         </p>
                     </div>
                 </div>
