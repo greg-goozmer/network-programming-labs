@@ -13,7 +13,11 @@ export const products = [
             'Проверка обязательных документов',
             'Подсказки по срокам подачи',
             'Быстрый старт без лишних действий'
-        ]
+        ],
+        serviceOfferNumbers: [1, 6, 5, 2, 7, 5, 1, 4, 3, 9, 8, 11, 10, 18],
+        targetOfferSum: 5,
+        servicePhrase: 'тендер документы сервис',
+        modelPath: './models/folder.glb'
     },
     {
         id: 2,
@@ -29,7 +33,11 @@ export const products = [
             'Объяснение простыми словами',
             'Разбор основных этапов',
             'Удобный формат для самостоятельного изучения'
-        ]
+        ],
+        serviceOfferNumbers: [2, 3, 8, 1, 4, 6, 7, 10, 11, 5],
+        targetOfferSum: 9,
+        servicePhrase: 'обучение заявка закупка',
+        modelPath: './models/folder.glb'
     },
     {
         id: 3,
@@ -45,8 +53,10 @@ export const products = [
             'Контроль полноты комплекта',
             'Удобная структура проверки',
             'Снижение риска пропуска важных файлов'
-        ]
+        ],
+        serviceOfferNumbers: [4, 1, 2, 5, 6, 3, 7, 9, 12, 8],
+        targetOfferSum: 10,
+        servicePhrase: 'сервис документы проверка',
+        modelPath: './models/folder.glb'
     }
 ];
-
-

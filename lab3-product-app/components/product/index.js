@@ -1,3 +1,5 @@
+import { findServiceOfferCouples, buildSortedServicePhrase } from '../../utils/product-tools.js';
+
 export class ProductComponent {
     constructor(parent) {
         this.parent = parent;
@@ -8,19 +10,24 @@ export class ProductComponent {
     }
 
     getHTML(data) {
+        const foundServiceCouples = findServiceOfferCouples(
+            data.serviceOfferNumbers,
+            data.targetOfferSum
+        );
+
+        const sortedServicePhrase = buildSortedServicePhrase(data.servicePhrase);
+
         return `
             <section class="container py-4 py-lg-5">
                 <div class="detail-card shadow-sm">
                     <div class="row g-4 align-items-start">
                         <div class="col-lg-4">
-                            <div class="detail-preview">
+                            <div class="detail-preview mb-4">
                                 <img class="detail-image" src="${data.image}" alt="${data.title}">
+                            </div>
 
-                                <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
-                                    <span class="badge text-bg-danger">${data.badge}</span>
-                                    <span class="badge text-bg-secondary">${data.category}</span>
-                                    <span class="badge text-bg-light border text-dark">${data.price}</span>
-                                </div>
+                            <div class="detail-model-box">
+                                <div id="product-model-viewer" class="product-model-viewer"></div>
                             </div>
                         </div>
 
@@ -28,6 +35,16 @@ export class ProductComponent {
                             <h1 class="mb-3">${data.title}</h1>
                             <p class="lead mb-3">${data.description}</p>
                             <p class="text-muted mb-4">Целевая аудитория: ${data.audience}</p>
+
+                            <div class="alert alert-light border mb-3" role="alert">
+                                <strong>Найденные пары для суммы ${data.targetOfferSum}:</strong>
+                                ${foundServiceCouples.length ? foundServiceCouples.join(', ') : 'Подходящих пар нет'}
+                            </div>
+
+                            <div class="alert alert-light border mb-4" role="alert">
+                                <strong>Отсортированная служебная фраза:</strong>
+                                ${sortedServicePhrase}
+                            </div>
 
                             <div class="accordion mb-4" id="product-accordion-${data.id}">
                                 <div class="accordion-item custom-accordion-item">
@@ -55,6 +72,10 @@ export class ProductComponent {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="alert alert-danger mb-0" role="alert">
+                                Возврат на главную страницу выполняется по нажатию на надпись «РосТендер» в левом верхнем углу.
                             </div>
                         </div>
                     </div>

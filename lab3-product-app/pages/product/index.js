@@ -1,6 +1,7 @@
 import { products } from '../../data/products.js';
 import { ProductComponent } from '../../components/product/index.js';
 import { MainPage } from '../main/index.js';
+import { renderProductModel } from '../../utils/product-viewer.js';
 
 export class ProductPage {
     constructor(parent, id) {
@@ -45,7 +46,11 @@ export class ProductPage {
 
         this.addListeners();
 
+        const productData = this.getData();
+
         const product = new ProductComponent(this.pageRoot);
-        product.render(this.getData());
+        product.render(productData);
+
+        renderProductModel('product-model-viewer', productData.modelPath);
     }
 }
