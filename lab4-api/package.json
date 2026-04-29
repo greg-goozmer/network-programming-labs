@@ -1,0 +1,24 @@
+{
+  "name": "lab4-api",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 4: Express API для продуктов с хранением данных в JSON",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "api",
+    "json"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
