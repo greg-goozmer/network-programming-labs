@@ -4,7 +4,7 @@ export class ProductComponent {
     }
 
     getFeaturesHTML(features) {
-        return features.map((item) => `<li class="list-group-item">${item}</li>`).join('');
+        return features.map((item) => `<li class="mb-2">${item}</li>`).join('');
     }
 
     getHTML(data) {
@@ -14,7 +14,8 @@ export class ProductComponent {
                     <div class="row g-4 align-items-start">
                         <div class="col-lg-4">
                             <div class="detail-preview">
-                                <div class="detail-icon">${data.icon}</div>
+                                <img class="detail-image" src="${data.image}" alt="${data.title}">
+
                                 <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
                                     <span class="badge text-bg-danger">${data.badge}</span>
                                     <span class="badge text-bg-secondary">${data.category}</span>
@@ -22,18 +23,38 @@ export class ProductComponent {
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-8">
                             <h1 class="mb-3">${data.title}</h1>
                             <p class="lead mb-3">${data.description}</p>
                             <p class="text-muted mb-4">Целевая аудитория: ${data.audience}</p>
 
-                            <h2 class="h4 mb-3">Что входит</h2>
-                            <ul class="list-group mb-4">
-                                ${this.getFeaturesHTML(data.features)}
-                            </ul>
-
-                            <div class="alert alert-primary mb-0" role="alert">
-                                Это вторая страница приложения. Она открывается по кнопке из карточки на главной странице.
+                            <div class="accordion mb-4" id="product-accordion-${data.id}">
+                                <div class="accordion-item custom-accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button
+                                            class="accordion-button collapsed custom-accordion-button"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#product-collapse-${data.id}"
+                                            aria-expanded="false"
+                                            aria-controls="product-collapse-${data.id}"
+                                        >
+                                            Что входит?
+                                        </button>
+                                    </h2>
+                                    <div
+                                        id="product-collapse-${data.id}"
+                                        class="accordion-collapse collapse"
+                                        data-bs-parent="#product-accordion-${data.id}"
+                                    >
+                                        <div class="accordion-body">
+                                            <ul class="mb-0 ps-3">
+                                                ${this.getFeaturesHTML(data.features)}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

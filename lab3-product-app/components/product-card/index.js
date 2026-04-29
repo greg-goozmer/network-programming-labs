@@ -7,14 +7,17 @@ export class ProductCardComponent {
         return `
             <div class="col-12 col-md-6 col-xl-4 mb-4">
                 <div class="product-card h-100 shadow-sm">
-                    <div class="product-icon">${data.icon}</div>
+                    <img class="product-image" src="${data.image}" alt="${data.title}">
+
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         <span class="badge text-bg-danger">${data.badge}</span>
                         <span class="badge text-bg-secondary">${data.category}</span>
                         <span class="badge text-bg-light border text-dark">${data.price}</span>
                     </div>
+
                     <h3 class="product-title">${data.title}</h3>
                     <p class="product-text">${data.shortText}</p>
+
                     <div class="mt-auto d-flex justify-content-between align-items-center gap-3 flex-wrap">
                         <small class="text-muted">${data.audience}</small>
                         <button id="open-card-${data.id}" data-id="${data.id}" class="btn btn-primary">

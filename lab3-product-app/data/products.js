@@ -1,7 +1,7 @@
 export const products = [
     {
         id: 1,
-        icon: '📄',
+        image: './assets/images/checklist.jpg',
         title: 'Чек-лист по подготовке заявки',
         shortText: 'Пошаговый список действий для аккуратной подачи документов на участие в закупке.',
         price: 'Бесплатно',
@@ -17,7 +17,7 @@ export const products = [
     },
     {
         id: 2,
-        icon: '🗂️',
+        image: './assets/images/instruction.jpg',
         title: 'Инструкция по участию в тендерах',
         shortText: 'Базовый гид по первым шагам: от поиска закупки до отправки заявки.',
         price: '990 ₽',
@@ -33,7 +33,7 @@ export const products = [
     },
     {
         id: 3,
-        icon: '✅',
+        image: './assets/images/documents.jpg',
         title: 'Проверка комплекта документации',
         shortText: 'Инструмент для самоконтроля перед загрузкой файлов на площадку.',
         price: '1490 ₽',
@@ -48,3 +48,5 @@ export const products = [
         ]
     }
 ];
+
+
