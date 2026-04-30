@@ -1,4 +1,9 @@
-import { findServiceOfferCouples, buildSortedServicePhrase } from '../../utils/product-tools.js';
+import {
+    findServiceOfferCouples,
+    buildSortedServicePhrase,
+    getSumAndMultOfServiceValues,
+    fillServiceTagsArray
+} from '../../utils/product-tools.js';
 
 export class ProductComponent {
     constructor(parent) {
@@ -16,6 +21,13 @@ export class ProductComponent {
         );
 
         const sortedServicePhrase = buildSortedServicePhrase(data.servicePhrase);
+
+        const serviceValueResult = getSumAndMultOfServiceValues(data.serviceValueArray);
+
+        const filledServiceTags = fillServiceTagsArray(
+            data.serviceTagCount,
+            data.serviceTagValue
+        );
 
         return `
             <section class="container py-4 py-lg-5">
@@ -41,9 +53,19 @@ export class ProductComponent {
                                 ${foundServiceCouples.length ? foundServiceCouples.join(', ') : 'Подходящих пар нет'}
                             </div>
 
-                            <div class="alert alert-light border mb-4" role="alert">
+                            <div class="alert alert-light border mb-3" role="alert">
                                 <strong>Отсортированная служебная фраза:</strong>
                                 ${sortedServicePhrase}
+                            </div>
+
+                            <div class="alert alert-light border mb-3" role="alert">
+                                <strong>Сумма значений массива:</strong> ${serviceValueResult.sum}<br>
+                                <strong>Произведение значений массива:</strong> ${serviceValueResult.mult}
+                            </div>
+
+                            <div class="alert alert-light border mb-4" role="alert">
+                                <strong>Заполненный массив тегов:</strong>
+                                [${filledServiceTags.join(', ')}]
                             </div>
 
                             <div class="accordion mb-4" id="product-accordion-${data.id}">

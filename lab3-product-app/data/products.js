@@ -17,6 +17,9 @@ export const products = [
         serviceOfferNumbers: [1, 6, 5, 2, 7, 5, 1, 4, 3, 9, 8, 11, 10, 18],
         targetOfferSum: 5,
         servicePhrase: 'тендер документы сервис',
+        serviceValueArray: [2, 3, 4],
+        serviceTagCount: 3,
+        serviceTagValue: 'документ',
         modelPath: './models/folder.glb'
     },
     {
@@ -37,6 +40,9 @@ export const products = [
         serviceOfferNumbers: [2, 3, 8, 1, 4, 6, 7, 10, 11, 5],
         targetOfferSum: 9,
         servicePhrase: 'обучение заявка закупка',
+        serviceValueArray: [1, 5, 2],
+        serviceTagCount: 4,
+        serviceTagValue: 'урок',
         modelPath: './models/folder.glb'
     },
     {
@@ -57,6 +63,9 @@ export const products = [
         serviceOfferNumbers: [4, 1, 2, 5, 6, 3, 7, 9, 12, 8],
         targetOfferSum: 10,
         servicePhrase: 'сервис документы проверка',
+        serviceValueArray: [3, 2, 6],
+        serviceTagCount: 5,
+        serviceTagValue: 'сервис',
         modelPath: './models/folder.glb'
     }
 ];

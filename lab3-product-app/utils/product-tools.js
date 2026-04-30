@@ -48,3 +48,30 @@ export function buildSortedServicePhrase(servicePhrase) {
 
     return sortedLetterWords.join(' ');
 }
+
+export function getSumAndMultOfServiceValues(serviceValueArray) {
+    let sum = 0;
+    let mult = 1;
+
+    for (const serviceValue of serviceValueArray) {
+        sum += serviceValue;
+        mult *= serviceValue;
+    }
+
+    return {
+        sum,
+        mult
+    };
+}
+
+export function fillServiceTagsArray(serviceTagCount, serviceTagValue) {
+    const filledServiceTags = [];
+    let currentLength = 0;
+
+    while (currentLength < serviceTagCount) {
+        filledServiceTags.push(serviceTagValue);
+        currentLength++;
+    }
+
+    return filledServiceTags;
+}
