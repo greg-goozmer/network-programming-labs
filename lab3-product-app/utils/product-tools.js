@@ -23,6 +23,22 @@ export function findServiceOfferCouples(serviceOfferNumbers, targetOfferSum) {
     return foundCouples;
 }
 
+export function getSumAndMultOfServiceValues(serviceValueArray) {
+    let sum = 0;
+    let mult = 1;
+
+    for (const serviceValue of serviceValueArray) {
+        sum += serviceValue;
+        mult *= serviceValue;
+    }
+
+    return {
+        sum,
+        mult
+    };
+}
+
+
 export function buildSortedServicePhrase(servicePhrase) {
     const serviceWords = servicePhrase.split(' ').filter(Boolean);
 
@@ -49,21 +65,6 @@ export function buildSortedServicePhrase(servicePhrase) {
     return sortedLetterWords.join(' ');
 }
 
-export function getSumAndMultOfServiceValues(serviceValueArray) {
-    let sum = 0;
-    let mult = 1;
-
-    for (const serviceValue of serviceValueArray) {
-        sum += serviceValue;
-        mult *= serviceValue;
-    }
-
-    return {
-        sum,
-        mult
-    };
-}
-
 export function fillServiceTagsArray(serviceTagCount, serviceTagValue) {
     const filledServiceTags = [];
     let currentLength = 0;
@@ -75,3 +76,9 @@ export function fillServiceTagsArray(serviceTagCount, serviceTagValue) {
 
     return filledServiceTags;
 }
+
+
+console.log(findServiceOfferCouples([1, 6, 5, 2, 7, 5, 1, 4, 3, 9, 8, 11, 10, 18], 5));
+console.log(getSumAndMultOfServiceValues([2, 3, 4]));
+console.log(buildSortedServicePhrase('тендер документы сервис'));
+console.log(fillServiceTagsArray(3, 'документ'));
