@@ -2,6 +2,7 @@ import { ProductCardComponent } from '../../components/product-card/index.js';
 import { ProductPage } from '../product/index.js';
 import { ajax } from '../../modules/ajax.js';
 import { productUrls } from '../../modules/productUrls.js';
+import { FormPage } from '../form/index.js';
 
 export class MainPage {
     static selectedCategory = 'Все';
@@ -77,7 +78,8 @@ export class MainPage {
     }
 
     openCreateForm() {
-        alert('Страницу добавления подключим следующим шагом.');
+    const formPage = new FormPage(this.parent);
+    formPage.render();
     }
 
     setFilter(category) {

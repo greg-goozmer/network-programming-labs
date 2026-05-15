@@ -2,6 +2,7 @@ import { ProductComponent } from '../../components/product/index.js';
 import { MainPage } from '../main/index.js';
 import { ajax } from '../../modules/ajax.js';
 import { productUrls } from '../../modules/productUrls.js';
+import { FormPage } from '../form/index.js';
 
 export class ProductPage {
     constructor(parent, id) {
@@ -38,7 +39,8 @@ export class ProductPage {
     }
 
     openEditForm() {
-        alert(`Страницу редактирования подключим следующим шагом. ID продукта: ${this.id}`);
+    const formPage = new FormPage(this.parent, this.id);
+    formPage.render();
     }
 
     getData() {
