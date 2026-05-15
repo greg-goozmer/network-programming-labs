@@ -1,25 +1,18 @@
 import { ProductCardComponent } from '../../components/product-card/index.js';
 import { ProductPage } from '../product/index.js';
-import { products } from '../../data/products.js';
+import { ajax } from '../../modules/ajax.js';
+import { productUrls } from '../../modules/productUrls.js';
 
 export class MainPage {
-    static nextCardIndex = 0;
     static selectedCategory = 'Все';
 
     constructor(parent) {
         this.parent = parent;
+        this.filterTitle = '';
     }
 
     get pageRoot() {
         return document.getElementById('main-page');
-    }
-
-    getData() {
-        if (MainPage.selectedCategory === 'Все') {
-            return products;
-        }
-
-        return products.filter((item) => item.category === MainPage.selectedCategory);
     }
 
     getHTML() {
@@ -38,9 +31,21 @@ export class MainPage {
                             На данной странице представлены полезные продукты для изучения основ закупок.
                         </p>
 
-                        <div class="d-flex justify-content-center flex-wrap gap-3 mb-3">
-                            <button id="add-card-btn" class="btn btn-primary">Добавить карточку</button>
-                            <button id="delete-card-btn" class="btn btn-outline-secondary">Удалить карточку</button>
+                        <div class="d-flex justify-content-center flex-wrap gap-2 mb-3">
+                            <input
+                                id="filter-title-input"
+                                class="form-control"
+                                type="text"
+                                placeholder="Введите название продукта"
+                                value="${this.filterTitle}"
+                                style="max-width: 320px;"
+                            >
+                            <button id="filter-title-btn" class="btn btn-outline-secondary">
+                                Фильтровать
+                            </button>
+                            <button id="open-create-form-btn" class="btn btn-primary">
+                                Добавить продукт
+                            </button>
                         </div>
 
                         <div class="d-flex justify-content-center flex-wrap gap-2">
@@ -71,45 +76,82 @@ export class MainPage {
         mainPage.render();
     }
 
-    addCard() {
-        const templates = products.slice(0, 3);
-        const template = templates[MainPage.nextCardIndex];
-        const newCard = JSON.parse(JSON.stringify(template));
-
-        const maxId = products.length ? Math.max(...products.map(item => item.id)) : 0;
-        newCard.id = maxId + 1;
-
-        products.push(newCard);
-
-        MainPage.nextCardIndex = (MainPage.nextCardIndex + 1) % 3;
-
-        this.render();
-    }
-
-    deleteCard() {
-        if (products.length > 0) {
-            products.pop();
-            this.render();
-        }
+    openCreateForm() {
+        alert('Страницу добавления подключим следующим шагом.');
     }
 
     setFilter(category) {
         MainPage.selectedCategory = category;
-        this.render();
+        this.getData();
+    }
+
+    applyTitleFilter() {
+        this.filterTitle = document.getElementById('filter-title-input').value.trim();
+        this.getData();
+    }
+
+    getData() {
+        this.pageRoot.innerHTML = `
+            <div class="col-12 text-center text-muted">
+                Загрузка данных...
+            </div>
+        `;
+
+        ajax.get(
+            productUrls.getProducts(this.filterTitle, MainPage.selectedCategory),
+            (data, status) => {
+                this.pageRoot.innerHTML = '';
+
+                if (status !== 200 || !Array.isArray(data)) {
+                    this.pageRoot.innerHTML = `
+                        <div class="col-12 text-center text-danger">
+                            Не удалось загрузить продукты с сервера.
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.renderData(data);
+            }
+        );
+    }
+
+    renderData(items) {
+        if (!items.length) {
+            this.pageRoot.innerHTML = `
+                <div class="col-12 text-center text-muted">
+                    По вашему запросу ничего не найдено.
+                </div>
+            `;
+            return;
+        }
+
+        items.forEach((item) => {
+            const productCard = new ProductCardComponent(this.pageRoot);
+            productCard.render(item, this.clickCard.bind(this));
+        });
     }
 
     addPageListeners() {
         document
-            .getElementById('add-card-btn')
-            .addEventListener('click', this.addCard.bind(this));
-
-        document
-            .getElementById('delete-card-btn')
-            .addEventListener('click', this.deleteCard.bind(this));
-
-        document
             .getElementById('brand-link')
             .addEventListener('click', this.clickBrand.bind(this));
+
+        document
+            .getElementById('filter-title-btn')
+            .addEventListener('click', this.applyTitleFilter.bind(this));
+
+        document
+            .getElementById('open-create-form-btn')
+            .addEventListener('click', this.openCreateForm.bind(this));
+
+        document
+            .getElementById('filter-title-input')
+            .addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    this.applyTitleFilter();
+                }
+            });
 
         document
             .getElementById('filter-all')
@@ -131,13 +173,7 @@ export class MainPage {
     render() {
         this.parent.innerHTML = '';
         this.parent.insertAdjacentHTML('beforeend', this.getHTML());
-
         this.addPageListeners();
-
-        const data = this.getData();
-        data.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot);
-            productCard.render(item, this.clickCard.bind(this));
-        });
+        this.getData();
     }
 }
