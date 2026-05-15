@@ -1,8 +1,8 @@
 const productsService = require('../services/productsService');
 
 const getAllProducts = (req, res) => {
-    const { title, category } = req.query;
-    const products = productsService.findAll(title, category);
+    const { title, category, price } = req.query;
+    const products = productsService.findAll(title, category, price);
     res.status(200).json(products);
 };
 

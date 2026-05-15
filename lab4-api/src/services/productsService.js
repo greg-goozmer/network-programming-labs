@@ -6,12 +6,18 @@ const init = (filePath) => {
     dataFilePath = filePath;
 };
 
-const findAll = (title, category) => {
+const findAll = (title, category, price) => {
     let products = fileService.readData(dataFilePath);
 
     if (title) {
         products = products.filter((product) =>
             product.title.toLowerCase().includes(title.toLowerCase())
+        );
+    }
+
+    if (price) {
+        products = products.filter((product) =>
+            product.price === price
         );
     }
 
